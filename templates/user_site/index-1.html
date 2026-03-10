@@ -30,8 +30,8 @@
 		<div class="header-top clearfix ">
 			<div class="header-top-left float-left ul-li">
 				<ul>
-					<li><i class="far fa-envelope"></i>info@webmail.com</li>
-					<li><i class="fas fa-phone"></i>+987 876 765 65 5</li>
+					<li><i class="far fa-envelope"></i>codecraften@gmail.com</li>
+					<li><i class="fas fa-phone"></i>9725705554</li>
 					<li><i class="fas fa-map-marker-alt"></i>14/A, Brown City, NYC</li>
 				</ul>
 			</div>
@@ -71,7 +71,7 @@
 							<ul class="dropdown-menu ul-li-block clearfix">
 								<li><a href="{% url 'api:index_1' %}">Home Page 1</a></li>
 								<li><a href="{% url 'api:index_2' %}">Home Page 2</a></li>
-								<li><a href="{% url 'api:index_3' %}">Home Page 3</a></li>
+								{% comment %} <li><a href="{% url 'api:index_3' %}">Home Page 3</a></li> {% endcomment %}
 							</ul>
 						</li>
 						<li><a href="{% url 'api:about' %}">About</a></li>
@@ -99,60 +99,13 @@
 								<li><a href="{% url 'api:faq' %}">Faq</a></li>
 								<li><a href="{% url 'api:team_list' %}">Team</a></li>
 								<li><a href="{% url 'api:contact' %}">Contact</a></li>
-								<li><a href="{% url 'api:team_single' 1 %}">Team Details</a></li>
-							</ul>
+ 							</ul>
 						</li>
 					</ul>
 				</nav>
 				<div class="header-main-option">
-					<div class="main-option-list search-option">
-						<a class="option-btn search-btn" href="javascript:void(0)"><i class="fas fa-search"></i></a>
-					</div>
-					<div class="main-option-list cart-option relative-position">
-						<a class="option-btn cart-open-btn" href="javascript:void(0)"><i class="fas fa-shopping-cart"></i></a>
-						<div class="shopping-cart">
-							<div class="shopping-cart-list ul-li-block">
-								<ul>
-									<li>
-										<div class="cart-product-img float-left">
-											<img src="{% static 'user/img/cart/crt1.jpg' %}" alt="">
-										</div>
-										<div class="cart-product-text headline-1">
-											<h3><a href="#">New apple airpod </a></h3>
-											<span class="cart-price">$250.00</span>
-											<span class="cart-quant">Quantiy: 01</span>
-										</div>
-									</li>
-									<li>
-										<div class="cart-product-img float-left">
-											<img src="{% static 'user/img/cart/crt2.jpg' %}" alt="">
-										</div>
-										<div class="cart-product-text headline-1">
-											<h3><a href="#">Digital Wirless Mouse </a></h3>
-											<span class="cart-price">$250.00</span>
-											<span class="cart-quant">Quantiy: 01</span>
-										</div>
-									</li>
-									<li>
-										<div class="cart-product-img float-left">
-											<img src="{% static 'user/img/cart/crt3.jpg' %}" alt="">
-										</div>
-										<div class="cart-product-text headline-1">
-											<h3><a href="#">High Quality Desktop </a></h3>
-											<span class="cart-price">$250.00</span>
-											<span class="cart-quant">Quantiy: 01</span>
-										</div>
-									</li>
-								</ul>
-								<div class="cart-total float-left">
-									Total: <span>$2150.00</span>
-								</div>
-								<div class="cart-checkout float-right">
-									<a href="#">Check Out</a>
-								</div>
-							</div>
-						</div>
-					</div>
+		
+					 
 					<div class="main-option-list sidebar-option">
 						<a class="option-btn open_side_area" href="javascript:void(0)"><i class="fas fa-bars"></i></a>
 					</div>
@@ -1164,7 +1117,7 @@
 					</div>
 				</div>
 				<div class="footer-copyright text-center pera-content">
-					<p>Copyright By@ <a href="#">Themexriver - 2020</a></p>
+					<p>Copyright By@ <a href="#">codecraften -2023</a></p>
 				</div>
 			</div>
 		</div>
