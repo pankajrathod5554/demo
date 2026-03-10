@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Our Services</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/flaticon.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/fontawesome-all.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/animate.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/video.min.css' %}">
+	<link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+</head>
+<body>
+	<div id="preloader"></div>
+	<div class="up"><a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a></div>
+
+	<header id="it-header" class="it-header-area header-style-one header-style-four">
+		<div class="header-main-menu clearfix">
+			<div class="brand-logo float-left">
+				<a href="{% url 'api:index_1' %}"><img src="{% static 'user/img/logo/logo-2.png' %}" alt=""></a>
+			</div>
+			<div class="it-menu-itemlist float-right">
+				<nav class="main-navigation ul-li">
+					<ul>
+						<li class="dropdown"><a href="#">Home</a>
+							<ul class="dropdown-menu ul-li-block clearfix">
+								<li><a href="{% url 'api:index_1' %}">Home Page 1</a></li>
+								<li><a href="{% url 'api:index_2' %}">Home Page 2</a></li>
+								<li><a href="{% url 'api:index_3' %}">Home Page 3</a></li>
+							</ul>
+						</li>
+						<li><a href="{% url 'api:about' %}">About</a></li>
+						<li class="dropdown"><a href="#">Service</a>
+							<ul class="dropdown-menu ul-li-block clearfix">
+								<li><a href="{% url 'api:service_list' %}">Service</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a href="{% url 'api:case_list' %}">Case Study</a>
+							<ul class="dropdown-menu ul-li-block clearfix">
+								<li><a href="{% url 'api:case_list' %}">Case</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a href="{% url 'api:blog_list' %}">news</a>
+							<ul class="dropdown-menu ul-li-block clearfix">
+								<li><a href="{% url 'api:blog_list' %}">blog</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a href="#">Pages</a>
+							<ul class="dropdown-menu ul-li-block clearfix">
+								<li><a href="{% url 'api:faq' %}">Faq</a></li>
+								<li><a href="{% url 'api:team_list' %}">Team</a></li>
+								<li><a href="{% url 'api:contact' %}">Contact</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<div class="quote-btn-2 float-right text-center"><a href="{% url 'api:contact' %}">Get A Quote</a></div>
+			</div>
+		</div>
+	</header>
+
+	<section id="breadcurmb" class="breadcurmb-section position-relative" data-background="{% static 'user/img/banner/brbg.jpg' %}">
+		<div class="background_overlay"></div>
+		<div class="container">
+			<div class="breadcurmb-content headline-2">
+				<h2>Our Services</h2>
+				<div class="breadcrumb_item ul-li">
+					<ul class="breadcrumb">
+						<li class="breadcrumb-item"><a href="{% url 'api:index_1' %}">Home</a></li>
+						<li class="breadcrumb-item active">Services</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="service" class="service-section">
+		<div class="container">
+			<div class="service-content">
+				<div class="section-title title-style-one headline-1 text-center">
+					<span class="site-tag">Services</span>
+					<h2>What We Do Here</h2>
+				</div>
+				<div class="service-item-list">
+					<div class="row">
+						{% for service in services %}
+						<div class="col-lg-3 col-md-6 wow fadeInLeft">
+							<div class="service-icon-text relative-position">
+								<div class="service-icon text-center">
+									<i class="flaticon-compass"></i>
+								</div>
+								<div class="service-text headline-1 text-center pera-content relative-position">
+									<h3>{{ service.title }}</h3>
+									<p>{{ service.short_description|truncatewords:15|default:service.description|truncatewords:15 }}</p>
+								</div>
+								<div class="service-more text-center">
+									<a href="{% url 'api:service_single' service.slug %}"><i class="flaticon-right-arrow"></i></a>
+								</div>
+							</div>
+						</div>
+						{% empty %}
+						<div class="col-12 text-center py-5">
+							<p>No services available at the moment. Check back soon!</p>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer-2 relative-position">
+		<div class="container text-center py-4">
+			<p>&copy; IT Solutions. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script src="{% static 'user/js/jquery.min.js' %}"></script>
+	<script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'user/js/popper.min.js' %}"></script>
+	<script src="{% static 'user/js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - IT Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+         :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --dark-bg: #1a1d2e;
+            --sidebar-bg: #252a3d;
+            --content-bg: #f4f6f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--content-bg);
+            overflow-x: hidden;
+        }
+        /* Sidebar Styles */
+        
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 260px;
+            background: var(--sidebar-bg);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .sidebar.collapsed .sidebar-header h2 {
+            font-size: 18px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(74, 144, 226, 0.2);
+            color: #fff;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .sidebar-menu i {
+            width: 40px;
+            font-size: 18px;
+        }
+        
+        .sidebar-menu span {
+            white-space: nowrap;
+        }
+        
+        .sidebar.collapsed .sidebar-menu span {
+            display: none;
+        }
+        /* Main Content */
+        
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+        
+        .main-content.expanded {
+            margin-left: 80px;
+        }
+        /* Top Navigation */
+        
+        .top-nav {
+            background: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toggle-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark-bg);
+            cursor: pointer;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+        }
+        /* Profile Header */
+        
+        .profile-header {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .profile-cover {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #357abd 100%);
+            position: relative;
+        }
+        
+        .profile-info {
+            padding: 0 30px 30px;
+            position: relative;
+            margin-top: -60px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-info h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+        
+        .profile-info p {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--content-bg);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-item h4 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin: 0;
+        }
+        /* Tab Navigation */
+        
+        .profile-tabs {
+            background: #fff;
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid var(--content-bg);
+        }
+        
+        .tab-nav button {
+            flex: 1;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab-nav button:hover {
+            color: var(--primary-color);
+        }
+        
+        .tab-nav button.active {
+            color: var(--primary-color);
+        }
+        
+        .tab-nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        /* Timeline Post */
+        
+        .timeline-post {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .post-info h5 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .post-info small {
+            color: var(--secondary-color);
+        }
+        
+        .post-content {
+            color: var(--dark-bg);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--content-bg);
+        }
+        
+        .post-actions button {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .post-actions button:hover {
+            color: var(--primary-color);
+        }
+        /* Settings Form */
+        
+        .settings-section {
+            margin-bottom: 30px;
+        }
+        
+        .settings-section h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--content-bg);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-bg);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .btn-save {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-save:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+        /* Activity Card */
+        
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .activity-item:hover {
+            background: var(--content-bg);
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #fff;
+        }
+        
+        .activity-icon.primary {
+            background: var(--primary-color);
+        }
+        
+        .activity-icon.success {
+            background: var(--success-color);
+        }
+        
+        .activity-icon.warning {
+            background: var(--warning-color);
+        }
+        
+        .activity-content h6 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .activity-content p {
+            font-size: 13px;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+        /* Responsive */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .profile-stats {
+                flex-wrap: wrap;
+            }
+            .tab-nav {
+                flex-wrap: wrap;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-code"></i> <span>IT Admin</span></h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+            <li><a href="#" class="active"><i class="fas fa-users"></i><span>Users</span></a></li>
+            <li><a href="#"><i class="fas fa-briefcase"></i><span>Services</span></a></li>
+            <li><a href="#"><i class="fas fa-folder"></i><span>Portfolio</span></a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i><span>Messages</span></a></li>
+            <li><a href="#"><i class="fas fa-comments"></i><span>Testimonials</span></a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i><span>Blog Posts</span></a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i><span>Analytics</span></a></li>
+            <li><a href="#"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+            <li><a href="#"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="user-info">
+                <div>
+                    <strong>Admin User</strong>
+                    <p style="margin: 0; font-size: 12px; color: #6c757d;">Administrator</p>
+                </div>
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-cover"></div>
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2>John Doe</h2>
+                <p><i class="fas fa-briefcase"></i> Frontend Developer</p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <h4>48</h4>
+                        <p>Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>1.2K</h4>
+                        <p>Followers</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>350</h4>
+                        <p>Following</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>89</h4>
+                        <p>Posts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="timeline">
+                    <i class="fas fa-stream"></i> Timeline
+                </button>
+                <button class="tab-btn" data-tab="activity">
+                    <i class="fas fa-clock"></i> Activity
+                </button>
+                <button class="tab-btn" data-tab="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+
+            <!-- Timeline Tab -->
+            <div class="tab-content active" id="timeline">
+                <div class="timeline-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-info">
+                            <h5>John Doe</h5>
+                            <small>2 hours ago</small>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Just completed the new dashboard design for our IT solutions platform! Really excited about the modern UI and enhanced user experience. The team did an amazing job bringing this vision to life. 🚀</p>
+                    </div>
+                    <div class="post-actions">
+                        <button><i class="fas fa-thumbs-up"></i> Like</button>
+                        <button><i class="fas fa-comment"></i> Comment</button>
+                        <button><i class="fas fa-share"></i> Share</button>
+                    </div>
+                </div>
+
+                <div class="timeline-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-info">
+                            <h5>John Doe</h5>
+                            <small>1 day ago</small>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Working on implementing new security features for our cloud infrastructure. Cybersecurity is more important than ever, and we're committed to keeping our clients' data safe and secure. 🔒</p>
+                    </div>
+                    <div class="post-actions">
+                        <button><i class="fas fa-thumbs-up"></i> Like</button>
+                        <button><i class="fas fa-comment"></i> Comment</button>
+                        <button><i class="fas fa-share"></i> Share</button>
+                    </div>
+                </div>
+
+                <div class="timeline-post">
+                    <div class="post-header">
+                        <div class="post-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="post-info">
+                            <h5>John Doe</h5>
+                            <small>3 days ago</small>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Great team meeting today discussing our Q4 roadmap. Excited about the new features we're planning to roll out. Innovation never stops! 💡</p>
+                    </div>
+                    <div class="post-actions">
+                        <button><i class="fas fa-thumbs-up"></i> Like</button>
+                        <button><i class="fas fa-comment"></i> Comment</button>
+                        <button><i class="fas fa-share"></i> Share</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Tab -->
+            <div class="tab-content" id="activity">
+                <div class="activity-item">
+                    <div class="activity-icon primary">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>Created new project "Cloud Migration"</h6>
+                        <p>2 hours ago</p>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>Completed task "Security Audit"</h6>
+                        <p>5 hours ago</p>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon warning">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>Commented on "API Integration" discussion</h6>
+                        <p>1 day ago</p>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon primary">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>Uploaded new documentation files</h6>
+                        <p>2 days ago</p>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon success">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>Added 3 new team members to the project</h6>
+                        <p>3 days ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+                <form>
+                    <div class="settings-section">
+                        <h4>Personal Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" value="John" placeholder="Enter first name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" value="Doe" placeholder="Enter last name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" value="john.doe@example.com" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" value="+1 234 567 8900" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea rows="4" placeholder="Tell us about yourself">Passionate frontend developer with 5+ years of experience in building modern web applications.</textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Professional Details</h4>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" value="Frontend Developer" placeholder="Enter job title">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select>
+                                    <option>Development</option>
+                                    <option>Design</option>
+                                    <option>Marketing</option>
+                                    <option>Sales</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" value="San Francisco, CA" placeholder="Enter location">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Change Password</h4>
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" placeholder="Enter current password">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" placeholder="Confirm new password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle Sidebar
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+
+        // Tab Navigation
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Save button functionality
+        document.querySelector('.btn-save').addEventListener('click', () => {
+            alert('Settings saved successfully!');
+        });
+    </script>
+</body>
+
+</html>

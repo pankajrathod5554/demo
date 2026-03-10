@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - IT Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --dark-bg: #1a1d2e;
+            --sidebar-bg: #252a3d;
+            --content-bg: #f4f6f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--sidebar-bg) 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logout-container {
+            background: #fff;
+            padding: 50px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logout-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(74, 144, 226, 0);
+            }
+        }
+        
+        .logout-icon i {
+            font-size: 50px;
+            color: #fff;
+        }
+        
+        .logout-container h1 {
+            font-size: 32px;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+        }
+        
+        .logout-container p {
+            font-size: 16px;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .logout-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .countdown {
+            font-size: 14px;
+            color: var(--secondary-color);
+            margin-top: 20px;
+        }
+        
+        .countdown strong {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--content-bg);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto 0;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loading-spinner.show {
+            display: block;
+        }
+        
+        .session-info {
+            background: var(--content-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .session-info h3 {
+            font-size: 16px;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .session-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+        
+        .session-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .session-detail span:first-child {
+            color: var(--secondary-color);
+        }
+        
+        .session-detail span:last-child {
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+        /* Hidden state for logout confirmation */
+        
+        .logout-container.logging-out h1 {
+            display: none;
+        }
+        
+        .logout-container.logging-out p {
+            display: none;
+        }
+        
+        .logout-container.logging-out .logout-options {
+            display: none;
+        }
+        
+        .logout-container.logging-out .countdown {
+            display: none;
+        }
+        
+        .logout-message {
+            display: none;
+        }
+        
+        .logout-container.logging-out .logout-message {
+            display: block;
+            font-size: 18px;
+            color: var(--dark-bg);
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .logout-container {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+            .logout-options {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logout-container" id="logoutContainer">
+        <div class="logout-icon">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+
+        <h1>Sign Out?</h1>
+        <p>Are you sure you want to logout from your account? You can always sign back in at any time.</p>
+
+        <div class="logout-options">
+            <button class="btn btn-primary" onclick="confirmLogout()">
+                <i class="fas fa-check"></i> Yes, Logout
+            </button>
+            <button class="btn btn-secondary" onclick="cancelLogout()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+
+        <div class="countdown" id="countdown">
+            Auto logout in <strong id="timer">10</strong> seconds
+        </div>
+
+        <div class="logout-message">
+            <i class="fas fa-spinner fa-spin"></i> Logging you out...
+        </div>
+        <div class="loading-spinner" id="loadingSpinner"></div>
+
+        <div class="session-info">
+            <h3><i class="fas fa-info-circle"></i> Session Information</h3>
+            <div class="session-detail">
+                <span>User:</span>
+                <span>Admin User</span>
+            </div>
+            <div class="session-detail">
+                <span>Last Login:</span>
+                <span id="lastLogin"></span>
+            </div>
+            <div class="session-detail">
+                <span>Device:</span>
+                <span id="device"></span>
+            </div>
+            <div class="session-detail">
+                <span>IP Address:</span>
+                <span>192.168.1.100</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current time as last login
+        const now = new Date();
+        const lastLoginEl = document.getElementById('lastLogin');
+        lastLoginEl.textContent = now.toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        // Detect device
+        const deviceEl = document.getElementById('device');
+        const userAgent = navigator.userAgent;
+        let device = 'Unknown Device';
+
+        if (/Windows/.test(userAgent)) {
+            device = 'Windows PC - Chrome';
+        } else if (/Mac/.test(userAgent)) {
+            device = 'MacOS - Safari';
+        } else if (/Android/.test(userAgent)) {
+            device = 'Android Device';
+        } else if (/iPhone|iPad/.test(userAgent)) {
+            device = 'iOS Device - Safari';
+        }
+
+        deviceEl.textContent = device;
+
+        // Countdown timer
+        let timeLeft = 10;
+        const timerEl = document.getElementById('timer');
+        const countdownEl = document.getElementById('countdown');
+
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                confirmLogout();
+            }
+        }, 1000);
+
+        // Confirm logout
+        function confirmLogout() {
+            clearInterval(countdownInterval);
+
+            const container = document.getElementById('logoutContainer');
+            const spinner = document.getElementById('loadingSpinner');
+
+            container.classList.add('logging-out');
+            spinner.classList.add('show');
+            setTimeout(() => {
+
+                // For demo purposes, redirect to a login page or back to dashboard
+                window.location.href = 'page-login.html';
+            }, 2000);
+        }
+
+        // Cancel logout
+        function cancelLogout() {
+            clearInterval(countdownInterval);
+            window.location.href = 'dashboard.html';
+        }
+
+        // Prevent back button after logout
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
+</body>
+
+</html>
