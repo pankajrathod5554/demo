@@ -17,50 +17,7 @@
 	<div id="preloader"></div>
 	<div class="up"><a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a></div>
 
-	<header id="it-header" class="it-header-area header-style-one header-style-four">
-		<div class="header-main-menu clearfix">
-			<div class="brand-logo float-left">
-				<a href="{% url 'api:index_1' %}"><img src="{% static 'user/img/logo/logo-2.png' %}" alt=""></a>
-			</div>
-			<div class="it-menu-itemlist float-right">
-				<nav class="main-navigation ul-li">
-					<ul>
-						<li class="dropdown"><a href="#">Home</a>
-							<ul class="dropdown-menu ul-li-block clearfix">
-								<li><a href="{% url 'api:index_1' %}">Home Page 1</a></li>
-								<li><a href="{% url 'api:index_2' %}">Home Page 2</a></li>
-								<li><a href="{% url 'api:index_3' %}">Home Page 3</a></li>
-							</ul>
-						</li>
-						<li><a href="{% url 'api:about' %}">About</a></li>
-						<li class="dropdown"><a href="#">Service</a>
-							<ul class="dropdown-menu ul-li-block clearfix">
-								<li><a href="{% url 'api:service_list' %}">Service</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="{% url 'api:case_list' %}">Case Study</a>
-							<ul class="dropdown-menu ul-li-block clearfix">
-								<li><a href="{% url 'api:case_list' %}">Case</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="{% url 'api:blog_list' %}">news</a>
-							<ul class="dropdown-menu ul-li-block clearfix">
-								<li><a href="{% url 'api:blog_list' %}">blog</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="#">Pages</a>
-							<ul class="dropdown-menu ul-li-block clearfix">
-								<li><a href="{% url 'api:faq' %}">Faq</a></li>
-								<li><a href="{% url 'api:team_list' %}">Team</a></li>
-								<li><a href="{% url 'api:contact' %}">Contact</a></li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-				<div class="quote-btn-2 float-right text-center"><a href="{% url 'api:contact' %}">Get A Quote</a></div>
-			</div>
-		</div>
-	</header>
+{% include 'user_site/_header.html' %}
 
 	<section id="breadcurmb" class="breadcurmb-section position-relative" data-background="{% static 'user/img/banner/brbg.jpg' %}">
 		<div class="background_overlay"></div>

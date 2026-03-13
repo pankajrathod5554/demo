@@ -993,9 +993,29 @@ select:visited {
   padding: 25px 200px 0px; }
 
 .header-style-one .header-main-option {
-  float: right; }
+  float: right;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 20px; }
   .header-style-one .header-main-option .main-option-list {
     display: inline-block; }
+
+.header-style-one .header-main-option .header-phone {
+  font-weight: 600;
+  color: #ffffff;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 8px; }
+
+.header-style-one .header-main-option .header-phone i {
+  color: #ff5b2e; }
+
+.header-style-one .header-main-option .header-phone a {
+  color: inherit; }
 
 /*Dropdown menu*/
 /*----------------------------------------------------*/
