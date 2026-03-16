@@ -28,12 +28,6 @@ def _staff_required(view_func):
 def index_1(request):
     return render(request, 'user_site/index-1.html')
 
-def index_2(request):
-    return render(request, 'user_site/index-2.html')
-
-def index_3(request):
-    return render(request, 'user_site/index-3.html')
-
 def about(request):
     return render(request, 'user_site/about.html')
 

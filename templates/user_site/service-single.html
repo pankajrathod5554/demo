@@ -1,36 +1,8 @@
+{% extends 'user_site/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Service Details{% endblock %}
+{% block content %}
 
-<!-- Mirrored from html.themexriver.com/itsource/service-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 14:19:23 GMT -->
-<head>
-	<meta charset="UTF-8">
-	<title>Service Details</title>
-	<meta name="author" content="themexriver">
-	<meta name="description" content="iTsource - IT Solutions & Services Website Design HTML Template">
-	<meta name="keywords" content="	agency, business, corporate, creative, it, IT services, IT solutions, modern, multipurpose, portfolio, seo, services, software, solutions">
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/flaticon.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/fontawesome-all.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/owl.carousel.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/animate.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/video.min.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-</head>
-
-<body>
-	<div id="preloader"></div>
-	<div class="up">
-		<a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a>
-	</div>
-<!-- Start of header section
-	============================================= -->
-{% include 'user_site/_header.html' %}
-<!-- End of header section
-	============================================= -->
 
 <!-- Start of breadcurmb section
 	============================================= -->
@@ -407,106 +379,13 @@
 <!-- End of Platform section
 	============================================= -->
 
-<!-- Start of footer section
-	============================================= -->
-	<footer class="footer-2 relative-position">
-		<div class="footer-logo-memu">
-			<div class="container">
-				<div class="footer-menu-content">
-					<div class="row">
-						<div class="col-lg-3">
-							<div class="footer-logo">
-								<a href="#"><img src="{% static 'user/img/logo/f-logo2.png' %}" alt=""></a>
-							</div>
-						</div>
-						<div class="col-lg-7">
-							<div class="footer-menu-list ul-li clearfix text-capitalize">
-								<ul>
-									<li><a href="#">How It Works</a></li>
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Terms &amp; Conditions</a></li>
-									<li><a href="#">Faq</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-2">
-							<div class="footer-select clearfix">
-								<select>
-									<option>ENG</option>
-									<option>ARB</option>
-									<option>SPN</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> 
-		<div class="container">
-			<div class="footer-content  relative-position">
-				<div class="footer-widget">
-					<div class="footer-about headline-2 pera-content">
-						<h3 class="widget-title">About Us</h3>
-						<p>The ‘Lighthouse Projects’ are in the clinical with
-							disciplines of the chronic diseases Epilepsy,
-							Haemophilia and Bipolar Disorder. The epilepsy
-							Lighthouse between a
-							number of organisations – RSCI, HSE, eHealth
-						Ireland, Epilepsy Ireland, beaumont.</p>
-						<a href="#">Get In Touch <i class="flaticon-right-arrow"></i></a>
-					</div>
-				</div>
-				<div class="footer-widget">
-					<div class="footer-menu text-center headline-2 ul-li-block">
-						<h3 class="widget-title">IT Services</h3>
-						<ul>
-							<li><a href="#">Managed IT</a></li>
-							<li><a href="#">IT Support</a></li>
-							<li><a href="#">IT Consultancy</a></li>
-							<li><a href="#">Cloud Computing</a></li>
-							<li><a href="#">Cyber Security</a></li>
-							<li><a href="#">Custom Software</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="footer-widget">
-					<div class="footer-menu text-center headline-2 ul-li-block">
-						<h3 class="widget-title">Industries</h3>
-						<ul>
-							<li><a href="#">Banking</a></li>
-							<li><a href="#">Capital Markets</a></li>
-							<li><a href="#">Enterprise Technology</a></li>
-							<li><a href="#">Manufacturing</a></li>
-							<li><a href="#">Healthcare</a></li>
-							<li><a href="#">Higher Education</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="footer-widget">
-					<div class="footer-menu text-center headline-2 ul-li-block">
-						<h3 class="widget-title">Company</h3>
-						<ul>
-							<li><a href="#">About</a></li>
-							<li><a href="#">Leadership Team</a></li>
-							<li><a href="#">Case Studies</a></li>
-							<li><a href="#">Locations</a></li>
-							<li><a href="#">Cyber Security</a></li>
-							<li><a href="#">Careers</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-<!-- End of footer section
-	============================================= -->
 
-
-	<!-- For Js Library -->
+{% endblock %}
+{% block extra_js %}
 	<script src="{% static 'user/js/jquery.min.js' %}"></script>
 	<script src="{% static 'user/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'user/js/popper.min.js' %}"></script>
-	<script src="{% static 'user/js/owl.carousel.min.js' %}"></script>s
+	<script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
 	<script src="{% static 'user/js/jquery.magnific-popup.min.js' %}"></script>
 	<script src="{% static 'user/js/appear.js' %}"></script>
 	<script src="{% static 'user/js/wow.min.js' %}"></script>
@@ -519,8 +398,4 @@
 	<script src="{% static 'user/js/typer-new.js' %}"></script>
 	<script src="{% static 'user/js/script.js' %}"></script>
 	<script src="{% static 'user/js/gmap3.min.js' %}"></script>
-	<script src="http://maps.google.com/maps/api/js?key=AIzaSyC61_QVqt9LAhwFdlQmsNwi5aUJy9B2SyA"></script>
-</body>
-
-<!-- Mirrored from html.themexriver.com/itsource/service-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 14:19:23 GMT -->
-</html>	
+{% endblock %}

@@ -1,24 +1,8 @@
+{% extends 'user_site/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Our Services</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/flaticon.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/fontawesome-all.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/owl.carousel.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/animate.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/video.min.css' %}">
-	<link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-</head>
-<body>
-	<div id="preloader"></div>
-	<div class="up"><a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a></div>
+{% block title %}Our Services{% endblock %}
 
-{% include 'user_site/_header.html' %}
-
+{% block content %}
 	<section id="breadcurmb" class="breadcurmb-section position-relative" data-background="{% static 'user/img/banner/brbg.jpg' %}">
 		<div class="background_overlay"></div>
 		<div class="container">
@@ -68,16 +52,4 @@
 			</div>
 		</div>
 	</section>
-
-	<footer class="footer-2 relative-position">
-		<div class="container text-center py-4">
-			<p>&copy; IT Solutions. All rights reserved.</p>
-		</div>
-	</footer>
-
-	<script src="{% static 'user/js/jquery.min.js' %}"></script>
-	<script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'user/js/popper.min.js' %}"></script>
-	<script src="{% static 'user/js/script.js' %}"></script>
-</body>
-</html>
+{% endblock %}
