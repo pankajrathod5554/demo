@@ -71,12 +71,30 @@ Last change:    00/00/00
 				})
 			},
 			MobileMenu: function (){
-				$('.open_mobile_menu').on("click", function() {
+				$('.open_mobile_menu').on("click", function(e) {
+					e.preventDefault();
 					$('.mobile_menu_wrap').toggleClass("mobile_menu_on");
-				});
-				$('.open_mobile_menu').on('click', function () {
 					$('body').toggleClass('mobile_menu_overlay_on');
 				});
+				
+				$('.mobile_menu_overlay, .mobile_menu_close').on('click', function() {
+					$('.mobile_menu_wrap').removeClass("mobile_menu_on");
+					$('body').removeClass('mobile_menu_overlay_on');
+				});
+				
+				// Close menu on escape key
+				$(document).on('keydown', function(e) {
+					if (e.key === "Escape") {
+						$('.mobile_menu_wrap').removeClass("mobile_menu_on");
+						$('body').removeClass('mobile_menu_overlay_on');
+					}
+				});
+				
+				// Prevent menu close when clicking inside menu content
+				$('.mobile_menu_content').on('click', function(e) {
+					e.stopPropagation();
+				});
+				
 				if($('.mobile_menu-dropdown li.dropdown ul').length){
 					$('.mobile_menu-dropdown li.dropdown').append('<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>');
 					$('.mobile_menu-dropdown li.dropdown .dropdown-btn').on('click', function() {

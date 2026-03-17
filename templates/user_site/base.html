@@ -33,7 +33,6 @@
 		<div class="header-top-left float-left ul-li">
 			<ul>
 				<li><i class="far fa-envelope"></i>desk@codecraften.com</li>
-				<li><i class="fas fa-phone"></i>+91 9054100775</li>
 			</ul>
 		</div>
 		<div class="header-top-right float-right">
@@ -53,11 +52,11 @@
 	</div>
 	<!-- /header Top -->
 	<div class="header-main-menu clearfix">
-		<div class="brand-logo float-left">
-			<a href="{% url 'api:index_1' %}">
-				<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" style="max-height: 50px;">
-			</a>
-		</div>
+			<div class="brand-logo float-left">
+				<a href="{% url 'api:index_1' %}">
+					<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" class="main-logo">
+				</a>
+			</div>
 		<div class="it-menu-itemlist float-right">
 			<nav class="main-navigation ul-li">
 				<ul>
@@ -69,10 +68,6 @@
 				</ul>
 			</nav>
 			<div class="header-main-option">
-				<div class="header-phone">
-					<i class="fas fa-phone"></i>
-					<a href="tel:+919054100775">+91 9054100775</a>
-				</div>
 				<div class="main-option-list sidebar-option">
 					<a class="option-btn open_side_area" href="javascript:void(0)"><i class="fas fa-bars"></i></a>
 				</div>
@@ -116,7 +111,7 @@
 					<i class="far fa-times-circle"></i>
 				</div>
 				<div class="m-brand-logo text-center">
-					<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" style="max-height: 50px;">
+					<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" class="mobile-logo">
 				</div>
 				<div class="mobile-search-area">
 					<form action="#">
@@ -138,7 +133,6 @@
 				<div class="mobile-menu-contact-info ul-li-block">
 					<ul>
 						<li><i class="far fa-envelope"></i>desk@codecraften.com</li>
-						<li><i class="fas fa-phone"></i>+91 9054100775</li>
 					</ul>
 				</div>
 			</div>
@@ -247,7 +241,7 @@
 	<script src="{% static 'user/js/appear.js' %}"></script>
 	<script src="{% static 'user/js/wow.min.js' %}"></script>
 	<script src="{% static 'user/js/parallax-scroll.js' %}"></script>
-	<script src="{% static 'user/js/circle-progress.html' %}"></script>
+	<script src="{% static 'user/js/circle-progress.js' %}"></script>
 	<script src="{% static 'user/js/isotope.pkgd.min.js' %}"></script>
 	<script src="{% static 'user/js/masonry.pkgd.min.js' %}"></script>
 	<script src="{% static 'user/js/imagesloaded.pkgd.min.js' %}"></script>

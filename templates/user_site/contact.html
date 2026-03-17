@@ -13,7 +13,7 @@
 				<h2>Contact Us</h2>
 				<div class="breadcrumb_item ul-li">
 					<ul class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="{% url 'api:index_1' %}">Home</a></li>
 						<li class="breadcrumb-item active">Contact Us</li>
 					</ul>
 				</div>
@@ -37,7 +37,7 @@
 								<p>Our vertical solutions expertise allows your business to streamline workflow.</p>
 							</div>
 							<div class="contact-content-icon">
-								<img src="{% static 'user/img/icon/cc1.html' %}" alt="">
+								<i class="fas fa-question-circle fa-3x" style="color: #0F8B8D;"></i>
 							</div>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 								CodeCraften Headquarters</p>
 							</div>
 							<div class="contact-content-icon">
-								<img src="{% static 'user/img/icon/cc2.html' %}" alt="">
+								<i class="fas fa-map-marker-alt fa-3x" style="color: #0F8B8D;"></i>
 							</div>
 						</div>
 					</div>
@@ -63,15 +63,16 @@
 								<p>Open  <strong>Monday to Saturday</strong> <br>
 									From <strong>07:00 AM to 18:00 PM</strong> <br>
 									Offday <strong>Friday to Sunday</strong></p>
-								</div>
-								<div class="contact-content-icon">
-									<img src="{% static 'user/img/icon/cc3.html' %}" alt="">
-								</div>
+							</div>
+							<div class="contact-content-icon">
+								<i class="fas fa-clock fa-3x" style="color: #0F8B8D;"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</section>
 		</section>
 <!-- End of  contact page content section
 	============================================= -->		
@@ -91,12 +92,7 @@
 <!-- Start of contact form area section
 	============================================= -->
 	<section id="contact-form-field" class="contact-form-field-section">
-		<div class="contact-form-img img-no-1"><img src="{% static 'user/img/contact/cp1.html' %}" alt=""></div>
-		<div class="contact-form-img img-no-2"><img src="{% static 'user/img/contact/cp2.html' %}" alt=""></div>
-		<div class="contact-form-img img-no-3"><img src="{% static 'user/img/contact/cp3.html' %}" alt=""></div>
-		<div class="contact-form-img img-no-4"><img src="{% static 'user/img/contact/cp4.html' %}" alt=""></div>
-		<div class="contact-form-img img-no-5"><img src="{% static 'user/img/contact/cp5.html' %}" alt=""></div>
-		<div class="container">
+			<div class="container">
 			<div class="contact-form-content">
 				<div class="section-title title-style-two headline-2 text-center">
 					<span class="site-tag">Anything On Your Mind</span>
