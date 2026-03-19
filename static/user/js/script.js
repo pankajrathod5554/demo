@@ -71,14 +71,19 @@ Last change:    00/00/00
 				})
 			},
 			MobileMenu: function (){
-				$('.open_mobile_menu').on("click", function(e) {
+				// Open ONLY from hamburger button
+				$('.mobile_menu_button').on("click", function(e) {
 					e.preventDefault();
-					$('.mobile_menu_wrap').toggleClass("mobile_menu_on");
-					$('body').toggleClass('mobile_menu_overlay_on');
+					const $wrap = $(this).closest('.mobile_menu').find('.mobile_menu_wrap');
+					const shouldOpen = !$wrap.hasClass('mobile_menu_on');
+					$wrap.toggleClass('mobile_menu_on', shouldOpen);
+					$('body').toggleClass('mobile_menu_overlay_on', shouldOpen);
 				});
 				
+				// Close ONLY from overlay or close button
 				$('.mobile_menu_overlay, .mobile_menu_close').on('click', function() {
-					$('.mobile_menu_wrap').removeClass("mobile_menu_on");
+					const $wrap = $(this).closest('.mobile_menu_wrap');
+					$wrap.removeClass("mobile_menu_on");
 					$('body').removeClass('mobile_menu_overlay_on');
 				});
 				

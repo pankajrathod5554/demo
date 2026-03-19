@@ -70,7 +70,10 @@ body {
   background-color: #0F8B8D; }
 
 .container {
-  max-width: 1200px; }
+  max-width: 100%;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px; }
 
 .ul-li ul {
   margin: 0;
@@ -979,10 +982,11 @@ select:visited {
 
 .header-style-one .main-navigation {
   padding-top: 15px;
-  margin-right: 55px;
-  display: inline-block; }
+  margin-right: 0;
+  display: block;
+  text-align: center; }
   .header-style-one .main-navigation li {
-    margin-left: 68px;
+    margin-left: 0;
     text-transform: capitalize; }
     .header-style-one .main-navigation li a {
       color: #fff;
@@ -990,7 +994,43 @@ select:visited {
       padding-bottom: 30px; }
 
 .header-style-one .header-main-menu {
-  padding: 25px 200px 0px; }
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 30px 60px 10px; }
+
+.header-style-one .main-navigation ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desktop alignment: keep logo left, center nav items */
+@media screen and (min-width: 1025px) {
+  .header-style-one .header-main-menu {
+    display: flex;
+    align-items: center;
+  }
+  .header-style-one .brand-logo {
+    float: none;
+  }
+  .header-style-one .it-menu-itemlist {
+    float: none;
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .header-style-one .main-navigation {
+    flex: 1;
+  }
+  .header-style-one .header-main-option {
+    margin-left: auto;
+    float: none;
+  }
+}
 
 .header-style-one .header-main-option {
   float: right;
@@ -6378,31 +6418,33 @@ select:visited {
 
 /* Logo Sizing */
 .main-logo {
-  height: 70px;
+  height: 75px;
   width: auto;
   transition: all 0.3s ease;
+  display: block;
 }
 
 .mobile-logo {
-  height: 50px;
+  height: 55px;
   width: auto;
   transition: all 0.3s ease;
+  display: block;
 }
 
 /* Responsive logo adjustments */
 @media screen and (max-width: 768px) {
   .main-logo {
-    height: 50px;
+    height: 55px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .main-logo {
-    height: 40px;
+    height: 45px;
   }
   
   .mobile-logo {
-    height: 40px;
+    height: 45px;
   }
 }
 
@@ -6434,5 +6476,26 @@ select:visited {
     top: 8px;
     font-size: 20px;
     padding: 8px;
+  }
+}
+
+/* Footer responsiveness fixes (mobile/tablet) */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 40px;
+  }
+  .footer-content .footer-widget {
+    width: 100%;
+  }
+  .footer-widget .footer-menu {
+    padding-left: 0;
+    text-align: left;
+  }
+  .footer-widget .widget-title:after {
+    right: auto;
+    left: 0;
+    margin: 0;
   }
 }
