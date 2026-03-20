@@ -55,76 +55,44 @@
 					<i class="fas fa-phone"></i>
 					<a href="tel:+19725705554">+1 (972) 570-5554</a>
 				</div>
-				<div class="main-option-list sidebar-option">
-					<a class="option-btn open_side_area" href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-				</div>
 			</div>
 		</div>
-	</div>
-	<div class="wide_side_inner">
-		<div class="side_overlay open_side_area"></div>
-		<div class="side_inner_content text-center">
-			<div class="close_btn open_side_area">Back <i class="fas fa-arrow-right"></i></div>
-			<div class="side_inner_logo">
-				<a href="{% url 'api:index_1' %}"><img src="{% static 'user/img/logo/f-logo2.png' %}" alt="CodeCraften"></a>
-			</div>
-			<p>
-				BDLP is one of the leading multi-disciplinary law firms in Dhaka, Bangladesh managed by lawyers in and around Dhaka. The law firm is one of the top law firms in Dhaka and represents both foreign and local clients.
-			</p>
-			<div class="side_contact">
-				<div class="social_widget ul-li headline relative-position">
-					<h3> Follow Us On:</h3>
-					<ul>
-						<li class="h-fb"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="h-tw"><a href="#"><i class="fab fa-twitter"></i></a></li>
-						<li class="h-bh"><a href="#"><i class="fab fa-behance"></i></a></li>
-						<li class="h-yo"><a href="#"><i class="fab fa-youtube"></i></a></li>
-					</ul>
+		<div class="mobile_menu relative-position">
+			<div class="mobile_menu_wrap">
+				<div class="mobile_menu_overlay"></div>
+				<div class="mobile_menu_content">
+					<div class="m-brand-logo text-center">
+						<img src="{% static 'user/img/logo/f-logo2.png' %}" alt="CodeCraften">
+					</div>
+					<div class="mobile-search-area">
+						<form action="#">
+							<input type="text" name="search" placeholder="Search Here...">
+							<div class="search-sub-btn">
+								<button type="button"><i class="fas fa-search"></i></button>
+							</div>
+						</form>
+					</div>
+					<nav class="main-navigation mobile_menu-dropdown  clearfix ul-li">
+						<ul id="main-nav" class="navbar-nav text-capitalize clearfix">
+							<li><a href="{% url 'api:index_1' %}">Home</a></li>
+							<li><a href="{% url 'api:about' %}">About</a></li>
+							<li><a href="{% url 'api:service_list' %}">Services</a></li>
+							<li><a href="{% url 'api:case_list' %}">Portfolio</a></li>
+							<li><a href="{% url 'api:contact' %}">Contact</a></li>
+						</ul>
+					</nav>
+					<div class="mobile-menu-contact-info ul-li-block">
+						<ul>
+							<li><i class="far fa-envelope"></i>codecraften@gmail.com</li>
+							<li><i class="fas fa-phone"></i>+1 (972) 570-5554</li>
+							<li><i class="fas fa-map-marker-alt"></i>14/A, Brown City, NYC</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-			<div class="side_copywright">
-				Copyright By @ Themexriver
-			</div>
-		</div>
-	</div>
-	<div class="mobile_menu relative-position">
-		<div class="mobile_menu_button">
-			<i class="fas fa-bars"></i>
-		</div>
-		<div class="mobile_menu_wrap">
-			<div class="mobile_menu_overlay"></div>
-			<div class="mobile_menu_content">
-				<div class="mobile_menu_close">
-					<i class="far fa-times-circle"></i>
-				</div>
-				<div class="m-brand-logo text-center">
-					<img src="{% static 'user/img/logo/f-logo2.png' %}" alt="CodeCraften">
-				</div>
-				<div class="mobile-search-area">
-					<form action="#">
-						<input type="text" name="search" placeholder="Search Here...">
-						<div class="search-sub-btn">
-							<button><i class="fas fa-search"></i></button>
-						</div>
-					</form>
-				</div>
-				<nav class="main-navigation mobile_menu-dropdown  clearfix ul-li">
-					<ul id="main-nav" class="navbar-nav text-capitalize clearfix">
-						<li><a href="{% url 'api:index_1' %}">Home</a></li>
-						<li><a href="{% url 'api:about' %}">About</a></li>
-						<li><a href="{% url 'api:service_list' %}">Services</a></li>
-						<li><a href="{% url 'api:case_list' %}">Portfolio</a></li>
-						<li><a href="{% url 'api:contact' %}">Contact</a></li>
-					</ul>
-				</nav>
-				<div class="mobile-menu-contact-info ul-li-block">
-					<ul>
-						<li><i class="far fa-envelope"></i>codecraften@gmail.com</li>
-						<li><i class="fas fa-phone"></i>+1 (972) 570-5554</li>
-						<li><i class="fas fa-map-marker-alt"></i>14/A, Brown City, NYC</li>
-					</ul>
-				</div>
-			</div>
+			<button type="button" class="mobile_menu_button" aria-label="Open menu">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
 		</div>
 	</div>
 </header>

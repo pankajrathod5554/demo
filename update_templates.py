@@ -33,7 +33,7 @@ for filename in os.listdir(directory):
             footer_part = content[footer_start_match.start():]
             extra_js = []
             js_scripts = re.finditer(r'<script src="(.*?)"></script>', footer_part)
-            base_js = ['jquery.min.js', 'bootstrap.min.js', 'popper.min.js', 'owl.carousel.min.js', 'jquery.magnific-popup.min.js', 'appear.js', 'wow.min.js', 'parallax-scroll.js', 'circle-progress.html', 'isotope.pkgd.min.js', 'masonry.pkgd.min.js', 'imagesloaded.pkgd.min.js', 'jquery.easeScroll.min.js', 'typer-new.js', 'script.js']
+            base_js = ['jquery.min.js', 'bootstrap.min.js', 'popper.min.js', 'owl.carousel.min.js', 'jquery.magnific-popup.min.js', 'appear.js', 'wow.min.js', 'parallax-scroll.js', 'circle-progress.js', 'isotope.pkgd.min.js', 'masonry.pkgd.min.js', 'imagesloaded.pkgd.min.js', 'jquery.easeScroll.min.js', 'typer-new.js', 'script.js']
             
             for match in js_scripts:
                 script_path = match.group(1)
