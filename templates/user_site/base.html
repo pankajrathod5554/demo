@@ -9,6 +9,7 @@
 	<meta name="keywords" content="agency, business, corporate, creative, it, IT services, IT solutions, modern, multipurpose, portfolio, seo, services, software, solutions">
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{% static 'user/img/logo/New.png' %}" type="image/png">
 
 	<link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'user/css/flaticon.css' %}">
@@ -18,6 +19,78 @@
 	<link rel="stylesheet" href="{% static 'user/css/video.min.css' %}">
 	<link rel="stylesheet" href="{% static 'user/css/style.css' %}">
     {% block extra_css %}{% endblock %}
+	<script>
+	/* Mobile nav: runs before heavy JS so Owl / errors cannot block the menu */
+	(function () {
+		function closeMobileMenu() {
+			document.querySelectorAll('.mobile_menu_wrap').forEach(function (w) {
+				w.classList.remove('mobile_menu_on');
+			});
+			document.body.classList.remove('mobile_menu_overlay_on');
+		}
+		function toggleMobileMenu() {
+			var menu = document.querySelector('.mobile_menu');
+			if (!menu) return;
+			var wrap = menu.querySelector('.mobile_menu_wrap');
+			if (!wrap) return;
+			var open = !wrap.classList.contains('mobile_menu_on');
+			wrap.classList.toggle('mobile_menu_on', open);
+			document.body.classList.toggle('mobile_menu_overlay_on', open);
+		}
+		function bindMobileMenu() {
+			var menu = document.querySelector('.mobile_menu');
+			if (!menu) return;
+			var wrap = menu.querySelector('.mobile_menu_wrap');
+			var btn = menu.querySelector('.mobile_menu_button');
+			var overlay = wrap && wrap.querySelector('.mobile_menu_overlay');
+			var skipClick = false;
+			if (btn) {
+				btn.addEventListener('touchend', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					skipClick = true;
+					setTimeout(function () { skipClick = false; }, 500);
+					toggleMobileMenu();
+				}, { passive: false });
+				btn.addEventListener('click', function (e) {
+					if (skipClick) {
+						e.preventDefault();
+						e.stopPropagation();
+						return;
+					}
+					e.preventDefault();
+					e.stopPropagation();
+					toggleMobileMenu();
+				}, true);
+			}
+			function bindClose(el) {
+				if (!el) return;
+				el.addEventListener('touchend', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					closeMobileMenu();
+				}, { passive: false });
+				el.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+					closeMobileMenu();
+				}, true);
+			}
+			bindClose(overlay);
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') closeMobileMenu();
+			});
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', bindMobileMenu);
+		} else {
+			bindMobileMenu();
+		}
+		window.addEventListener('resize', function () {
+			if (window.matchMedia('(min-width: 992px)').matches) closeMobileMenu();
+		});
+	})();
+	</script>
 </head>
 
 <body>
@@ -67,75 +140,41 @@
 					<li><a href="{% url 'api:contact' %}">Contact</a></li>
 				</ul>
 			</nav>
-			<div class="header-main-option">
-				<div class="main-option-list sidebar-option">
-					<a class="option-btn open_side_area" href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-				</div>
-			</div>
 		</div>
-	</div>
-	<div class="wide_side_inner">
-		<div class="side_overlay open_side_area"></div>
-		<div class="side_inner_content text-center">
-			<div class="close_btn open_side_area">Back <i class="fas fa-arrow-right"></i></div>
-			<div class="side_inner_logo">
-				<a href="{% url 'api:index_1' %}"><img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften"></a>
-			</div>
-			<p>
-				CodeCraften is a leading IT Solutions and Services company, providing innovative digital solutions for businesses worldwide.
-			</p>
-			<div class="side_contact">
-				<div class="social_widget ul-li headline relative-position">
-					<h3> Follow Us On:</h3>
-					<ul>
-						<li class="h-fb"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="h-tw"><a href="#"><i class="fab fa-twitter"></i></a></li>
-						<li class="h-ln"><a href="#"><i class="fab fa-linkedin"></i></a></li>
-						<li class="h-yo"><a href="#"><i class="fab fa-instagram"></i></a></li>
-					</ul>
+		<div class="mobile_menu relative-position">
+			<div class="mobile_menu_wrap">
+				<div class="mobile_menu_overlay"></div>
+				<div class="mobile_menu_content">
+					<div class="m-brand-logo text-center">
+						<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" class="mobile-logo">
+					</div>
+					<div class="mobile-search-area">
+						<form action="#">
+							<input type="text" name="search" placeholder="Search Here...">
+							<div class="search-sub-btn">
+								<button type="button"><i class="fas fa-search"></i></button>
+							</div>
+						</form>
+					</div>
+					<nav class="main-navigation mobile_menu-dropdown  clearfix ul-li">
+						<ul id="main-nav" class="navbar-nav text-capitalize clearfix">
+							<li><a href="{% url 'api:index_1' %}">Home</a></li>
+							<li><a href="{% url 'api:about' %}">About</a></li>
+							<li><a href="{% url 'api:service_list' %}">Services</a></li>
+							<li><a href="{% url 'api:case_list' %}">Portfolio</a></li>
+							<li><a href="{% url 'api:contact' %}">Contact</a></li>
+						</ul>
+					</nav>
+					<div class="mobile-menu-contact-info ul-li-block">
+						<ul>
+							<li><i class="far fa-envelope"></i>desk@codecraften.com</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-			<div class="side_copywright">
-				Copyright &copy; {% now "Y" %} CodeCraften
-			</div>
-		</div>
-	</div>
-	<div class="mobile_menu relative-position">
-		<div class="mobile_menu_button">
-			<i class="fas fa-bars"></i>
-		</div>
-		<div class="mobile_menu_wrap">
-			<div class="mobile_menu_overlay"></div>
-			<div class="mobile_menu_content">
-				<div class="mobile_menu_close">
-					<i class="far fa-times-circle"></i>
-				</div>
-				<div class="m-brand-logo text-center">
-					<img src="{% static 'user/img/logo/New.png' %}" alt="CodeCraften" class="mobile-logo">
-				</div>
-				<div class="mobile-search-area">
-					<form action="#">
-						<input type="text" name="search" placeholder="Search Here...">
-						<div class="search-sub-btn">
-							<button><i class="fas fa-search"></i></button>
-						</div>
-					</form>
-				</div>
-				<nav class="main-navigation mobile_menu-dropdown  clearfix ul-li">
-					<ul id="main-nav" class="navbar-nav text-capitalize clearfix">
-						<li><a href="{% url 'api:index_1' %}">Home</a></li>
-						<li><a href="{% url 'api:about' %}">About</a></li>
-						<li><a href="{% url 'api:service_list' %}">Services</a></li>
-						<li><a href="{% url 'api:case_list' %}">Portfolio</a></li>
-						<li><a href="{% url 'api:contact' %}">Contact</a></li>
-					</ul>
-				</nav>
-				<div class="mobile-menu-contact-info ul-li-block">
-					<ul>
-						<li><i class="far fa-envelope"></i>desk@codecraften.com</li>
-					</ul>
-				</div>
-			</div>
+			<button type="button" class="mobile_menu_button" aria-label="Open menu">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
 		</div>
 	</div>
 </header>

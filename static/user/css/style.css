@@ -97,7 +97,8 @@ div#preloader {
   width: 100%;
   height: 100%;
   overflow: visible;
-  background: #fff url("../img/preloader.html") no-repeat center center; }
+  pointer-events: none;
+  background: #fff no-repeat center center; }
 
 [data-background] {
   background-size: cover;
@@ -918,7 +919,7 @@ select:visited {
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  cursor: url(../img/cl.html), auto; }
+  cursor: auto; }
 
 .body_overlay_on {
   overflow: hidden; }
@@ -931,9 +932,15 @@ select:visited {
 /*(2)- Header area*/
 /*----------------------------------------------------*/
 .it-header-area {
-  z-index: 9;
+  z-index: 1000;
   width: 100%;
-  position: absolute; }
+  position: absolute;
+  isolation: isolate; }
+
+/* Hero carousel must stay below the fixed header hit targets */
+#slider .owl-carousel,
+#slider .owl-stage-outer {
+  z-index: 0; }
 
 .header-style-one .header-top {
   font-size: 14px;
@@ -1056,6 +1063,11 @@ select:visited {
 
 .header-style-one .header-main-option .header-phone a {
   color: inherit; }
+
+.header-style-one .open_side_area.option-btn {
+  position: relative;
+  z-index: 2;
+}
 
 /*Dropdown menu*/
 /*----------------------------------------------------*/
@@ -1185,7 +1197,7 @@ select:visited {
     height: 500px;
     position: absolute;
     background-repeat: no-repeat;
-    background-image: url(../img/logo/logo-shape.html); }
+    background-image: none; }
   .header-style-three .main-navigation {
     padding-top: 15px; }
     .header-style-three .main-navigation li {
@@ -2144,7 +2156,7 @@ select:visited {
     left: 115px;
     position: absolute;
     background-repeat: no-repeat;
-    background-image: url(../img/banner/map.html); }
+    background-image: url(../img/banner/ms1.jpg); }
 
 @-webkit-keyframes borderpls {
   0% {
@@ -2394,7 +2406,7 @@ select:visited {
 /*Feature(Home Page 3)*/
 /*----------------------------------------------------*/
 .feature-section.feature-section-3:before {
-  background-image: url(../img/banner/map2.html); }
+  background-image: url(../img/banner/d1.jpg); }
 
 .feature-section-3 {
   z-index: 1; }
@@ -2848,7 +2860,7 @@ select:visited {
     width: 700px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(../img/banner/chl2.html); }
+    background-image: url(../img/banner/chl1.jpg); }
   .challenge-section:after {
     position: absolute;
     content: '';
@@ -2860,7 +2872,7 @@ select:visited {
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1;
-    background-image: url(../img/banner/chls.html); }
+    background-image: url(../img/banner/chl3.jpg); }
   .challenge-section .custom_tab_button {
     margin-right: 20px;
     border-radius: 20px;
@@ -5196,10 +5208,10 @@ select:visited {
     height: 100%;
     position: absolute;
     background-repeat: no-repeat;
-    background-image: url(../img/shape/f-shape1.html); }
+    background-image: none; }
   .footer-area-one:before {
     top: 150px;
-    background-image: url(../img/shape/f-shape2.html); }
+    background-image: none; }
   .footer-area-one .footer-widget .widget-title,
   .footer-area-one .footer-content .footer-about a,
   .footer-area-one .footer-content .footer-about p,
@@ -5240,7 +5252,7 @@ select:visited {
     width: 100%;
     bottom: 0;
     z-index: -2;
-    background-image: url(../img/banner/footerbg.html); }
+    background-image: url(../img/banner/brbg.jpg); }
   .footer-2:after {
     content: '';
     position: absolute;
@@ -5248,7 +5260,7 @@ select:visited {
     width: 100%;
     bottom: 0;
     z-index: -1;
-    background-image: url(../img/banner/fshape.html); }
+    background-image: none; }
 
 .footer-logo-memu .footer-menu-content {
   padding-bottom: 60px;
@@ -5361,12 +5373,12 @@ select:visited {
   position: fixed;
   overflow-y: scroll;
   background-color: #ffffff;
-  padding: 80px 25px 50px 25px;
+  padding: 50px 25px 50px 25px;
   -webkit-box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
   box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
-  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  -o-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  -webkit-transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -o-transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .mobile_menu_content .main-navigation {
     width: 100%;
     margin-right: 0 !important; }
@@ -5442,32 +5454,68 @@ select:visited {
       background-color: #0F8B8D; }
 
 .mobile_menu_wrap.mobile_menu_on .mobile_menu_content {
-  right: 0px;
-  -webkit-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  -o-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  right: 0px; }
 
+/* Backdrop: fade in/out in sync with drawer (no 0.8s delay — old theme used transition-delay) */
 .mobile_menu_overlay {
-  top: 0;
-  width: 100%;
-  height: 100%;
   position: fixed;
+  inset: 0;
   z-index: 100;
-  right: -100%;
-  height: 120vh;
-  background-color: rgba(0, 0, 0, 0.9);
-  -webkit-transition: all .8s ease-in .8s;
-  -o-transition: all .8s ease-in .8s;
-  transition: all .8s ease-in .8s; }
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+  -o-transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
 .mobile_menu_overlay_on {
   overflow: hidden; }
 
 .mobile_menu_wrap.mobile_menu_on .mobile_menu_overlay {
-  right: 0;
-  -webkit-transition: all .8s ease-out 0s;
-  -o-transition: all .8s ease-out 0s;
-  transition: all .8s ease-out 0s; }
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Closed overlay is off-screen but can still steal taps; disable until open */
+.mobile_menu_wrap:not(.mobile_menu_on) .mobile_menu_overlay {
+  pointer-events: none;
+}
+
+/* Same for the sidebar overlay when the panel is closed */
+.wide_side_inner:not(.wide_side_on) .side_overlay {
+  pointer-events: none;
+}
+
+.wide_side_inner.wide_side_on .side_overlay {
+  pointer-events: auto;
+}
+
+/* Drawer is fixed; when closed it can still overlap the tap target — ignore hits until open */
+.mobile_menu_wrap:not(.mobile_menu_on) .mobile_menu_content {
+  pointer-events: none;
+}
+
+.mobile_menu_wrap.mobile_menu_on .mobile_menu_content {
+  pointer-events: auto;
+}
+
+.mobile_menu {
+  z-index: 20;
+}
+
+/* Drawer duplicate nav lives in DOM for ≤991px only — hide from desktop layout & a11y tree */
+@media screen and (min-width: 992px) {
+  .mobile_menu .mobile_menu_wrap {
+    display: none !important;
+  }
+  body.mobile_menu_overlay_on {
+    overflow: visible;
+  }
+}
 
 .mobile_menu_button {
   position: absolute;
@@ -5478,12 +5526,18 @@ select:visited {
   color: #0F8B8D;
   text-align: center;
   font-size: 25px;
-  z-index: 9999;
+  z-index: 99999;
   background: transparent;
   border: none;
   padding: 10px;
   border-radius: 4px;
   transition: all 0.3s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  line-height: 1;
+  touch-action: manipulation;
+  pointer-events: auto;
 }
 
 .mobile_menu_button:hover {
@@ -5514,29 +5568,6 @@ select:visited {
     .mobile_menu .mobile_menu_content .main-navigation .navbar-nav .dropdown-menu li a {
       color: #000;
       font-weight: 400; }
-
-.mobile_menu .mobile_menu_close {
-  color: #0F8B8D;
-  cursor: pointer;
-  top: 20px;
-  right: 20px;
-  left: auto;
-  font-size: 24px;
-  position: absolute;
-  background: rgba(15, 139, 141, 0.1);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.mobile_menu .mobile_menu_close:hover {
-  background: rgba(15, 139, 141, 0.2);
-  transform: rotate(90deg);
-}
 
 .mobile_menu .mobile-menu-contact-info {
   margin-top: 30px; }
@@ -5659,15 +5690,53 @@ select:visited {
   .team-member-1 .team-member-imgtext {
     width: 230px; } }
 
-@media screen and (max-width: 1024px) {
+/* Hamburger + drawer-only nav: tablet portrait and below (desktop keeps horizontal nav) */
+@media screen and (max-width: 991px) {
   .header-style-one .header-top {
     display: none; }
   .header-style-one .it-menu-itemlist .main-navigation {
     display: none; }
   .header-style-one .header-main-option {
     display: none; }
+  .header-style-one .header-main-menu {
+    position: relative;
+    padding-right: 52px; }
+  .header-style-one .mobile_menu {
+    position: absolute;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    margin: 0;
+    z-index: 30; }
+  .header-style-one .mobile_menu_button {
+    top: 50%;
+    margin-top: -22px;
+    right: 0; }
   .mobile_menu_button {
     display: block; }
+  .header-style-one.sticky-header-overlay {
+    top: -15px; }
+  .header-style-two .it-menu-itemlist {
+    display: none; }
+  .header-style-two .header-main-menu {
+    float: left; }
+  .header-style-two .mobile_menu_button {
+    right: 0;
+    top: 15px;
+    color: #fff; }
+  .header-style-two.sticky-header-overlay .mobile_menu_button {
+    color: #0F8B8D;
+    top: 10px; }
+  .header-style-three .it-menu-itemlist {
+    display: none; }
+  .header-style-three .mobile_menu_button {
+    right: 0; }
+  .header-style-three.sticky-header-overlay .mobile_menu_button {
+    top: 8px; }
+}
+
+@media screen and (max-width: 1024px) {
   .client-area .client-item-list li:nth-child(1),
   .client-area .client-item-list li:nth-child(2),
   .client-area .client-item-list li:nth-child(3),
@@ -5681,10 +5750,6 @@ select:visited {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin: 0; }
-  .header-style-one .mobile_menu_button {
-    top: 15px; }
-  .header-style-one.sticky-header-overlay {
-    top: -15px; }
   .slider-style-one .slider-home-one {
     padding: 250px 0px 0px 70px; }
   .banner-mockup {
@@ -5715,17 +5780,6 @@ select:visited {
     top: -65px; }
   .header-style-two {
     padding: 25px 50px 0px 50px; }
-    .header-style-two .it-menu-itemlist {
-      display: none; }
-    .header-style-two .header-main-menu {
-      float: left; }
-    .header-style-two .mobile_menu_button {
-      right: 0;
-      top: 15px;
-      color: #fff; }
-  .header-style-two.sticky-header-overlay .mobile_menu_button {
-    color: #0F8B8D;
-    top: 10px; }
   .slider-style-two .slider-content-box {
     padding: 250px 0px 250px; }
   .feature-content-2 {
@@ -5752,8 +5806,6 @@ select:visited {
     margin-right: 35px; }
   .slider-style-three .owl-nav {
     display: none; }
-  .header-style-three .it-menu-itemlist {
-    display: none; }
   .service-section-3 .service-content-3 {
     top: 0; }
   .service-section-3 .service-content-3 .service-circle-shape {
@@ -5762,10 +5814,6 @@ select:visited {
     padding-left: 15px; }
   .it-experience-section {
     padding-top: 80px; }
-  .header-style-three .mobile_menu_button {
-    right: 0; }
-  .header-style-three.sticky-header-overlay .mobile_menu_button {
-    top: 8px; }
   .slider-style-three .slider-content-box {
     padding: 220px 0px 150px; }
   .member-section-3 .team-member-3 .team-img-text .team-text h3 {
@@ -6042,7 +6090,7 @@ select:visited {
   
   .mobile_menu_content {
     width: 280px;
-    padding: 70px 20px 40px 20px;
+    padding: 45px 20px 40px 20px;
   }
   
   .mobile_menu_content .main-navigation .navbar-nav li a {
@@ -6051,8 +6099,9 @@ select:visited {
   }
   
   .header-style-one .mobile_menu_button {
-    right: 10px;
-    top: 8px;
+    right: 0;
+    top: 50%;
+    margin-top: -20px;
     font-size: 20px;
     padding: 8px;
   }
@@ -6449,7 +6498,7 @@ select:visited {
 }
 
 /* Additional navbar responsiveness improvements */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 991px) {
   .header-style-one .header-main-menu {
     padding: 15px 20px 0px;
   }
@@ -6461,8 +6510,9 @@ select:visited {
   }
   
   .header-style-one .mobile_menu_button {
-    right: 15px;
-    top: 10px;
+    right: 0;
+    top: 50%;
+    margin-top: -22px;
   }
 }
 
@@ -6472,8 +6522,9 @@ select:visited {
   }
   
   .header-style-one .mobile_menu_button {
-    right: 10px;
-    top: 8px;
+    right: 0;
+    top: 50%;
+    margin-top: -20px;
     font-size: 20px;
     padding: 8px;
   }

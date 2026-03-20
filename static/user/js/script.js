@@ -19,10 +19,10 @@ Last change:    00/00/00
 			init: function() {
 
 				this.preloader();
+				this.MobileMenu();
+				this.StickeyHeader();
 				this.Pointer();
 				this.Animation();
-				this.StickeyHeader();
-				this.MobileMenu();
 				this.MianSlider();
 				this.bannerStyle();
 				this.BackgroundImage();
@@ -43,22 +43,37 @@ Last change:    00/00/00
 				
 			},
 			preloader: function (){
-				jQuery(window).on('load', function(){
-					jQuery('#preloader').fadeOut('slow',function(){jQuery(this).remove();});
+				var $p = jQuery('#preloader');
+				if (!$p.length) {
+					return;
+				}
+				var hidden = false;
+				function hidePreloader() {
+					if (hidden) {
+						return;
+					}
+					hidden = true;
+					$p.fadeOut('slow', function () {
+						jQuery(this).remove();
+					});
+				}
+				jQuery(function () {
+					$p.css('pointer-events', 'none');
 				});
+				jQuery(window).on('load', hidePreloader);
+				setTimeout(hidePreloader, 5000);
 			},
 			Animation: function (){
-				if($('.wow').length){
-					var wow = new WOW(
-					{
-						boxClass:     'wow',
-						animateClass: 'animated',
-						offset:       0,
-						mobile:       true,
-						live:         true
-					}
-					);
-					wow.init();
+				if ($('.wow').length && typeof WOW !== 'undefined') {
+					try {
+						new WOW({
+							boxClass: 'wow',
+							animateClass: 'animated',
+							offset: 0,
+							mobile: true,
+							live: true
+						}).init();
+					} catch (err) { /* non-fatal */ }
 				}
 			},
 			StickeyHeader: function (){
@@ -71,35 +86,7 @@ Last change:    00/00/00
 				})
 			},
 			MobileMenu: function (){
-				// Open ONLY from hamburger button
-				$('.mobile_menu_button').on("click", function(e) {
-					e.preventDefault();
-					const $wrap = $(this).closest('.mobile_menu').find('.mobile_menu_wrap');
-					const shouldOpen = !$wrap.hasClass('mobile_menu_on');
-					$wrap.toggleClass('mobile_menu_on', shouldOpen);
-					$('body').toggleClass('mobile_menu_overlay_on', shouldOpen);
-				});
-				
-				// Close ONLY from overlay or close button
-				$('.mobile_menu_overlay, .mobile_menu_close').on('click', function() {
-					const $wrap = $(this).closest('.mobile_menu_wrap');
-					$wrap.removeClass("mobile_menu_on");
-					$('body').removeClass('mobile_menu_overlay_on');
-				});
-				
-				// Close menu on escape key
-				$(document).on('keydown', function(e) {
-					if (e.key === "Escape") {
-						$('.mobile_menu_wrap').removeClass("mobile_menu_on");
-						$('body').removeClass('mobile_menu_overlay_on');
-					}
-				});
-				
-				// Prevent menu close when clicking inside menu content
-				$('.mobile_menu_content').on('click', function(e) {
-					e.stopPropagation();
-				});
-				
+				/* Open/close/escape handled in base.html <head> so it always runs */
 				if($('.mobile_menu-dropdown li.dropdown ul').length){
 					$('.mobile_menu-dropdown li.dropdown').append('<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>');
 					$('.mobile_menu-dropdown li.dropdown .dropdown-btn').on('click', function() {
@@ -111,7 +98,11 @@ Last change:    00/00/00
 				});
 			},
 			MianSlider: function (){
-				jQuery('#slider-id').owlCarousel({
+				var $s = jQuery('#slider-id');
+				if (!$s.length) {
+					return;
+				}
+				$s.owlCarousel({
 					items: 1,
 					margin: 0,
 					loop: true,
@@ -123,12 +114,17 @@ Last change:    00/00/00
 					smartSpeed: 2000,
 					animateOut: 'fadeOut',
 					animateIn: 'fadeIn',
+					mouseDrag: false,
+					touchDrag: true,
+					pullDrag: false,
 				});
 			},
 			bannerStyle: function() {
 				var win = jQuery(window),
 				foo = jQuery('#typer');
-				foo.typer(['It Services','It Solution', 'Support' ]);           
+				if (foo.length && typeof foo.typer === 'function') {
+					foo.typer(['It Services','IT Solution', 'Support' ]);
+				}
 				win.resize(function(){
 					var fontSize = Math.max(Math.min(win.width() / (1 * 5), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
 
@@ -151,12 +147,39 @@ Last change:    00/00/00
 				});
 			},
 			SideInner: function (){
-				$('.open_side_area').on("click", function() {
-					$('.wide_side_inner').toggleClass("wide_side_on");
-				});
-				$('.open_side_area').on('click', function () {
-					$('body').toggleClass('body_overlay_on');
-				});
+				var sideSuppressClick = false;
+				function sideToggle(e, isTouch) {
+					var t = e.target;
+					if (!t || typeof t.closest !== 'function') {
+						return;
+					}
+					var trig = t.closest('.open_side_area');
+					if (!trig) {
+						return;
+					}
+					e.preventDefault();
+					e.stopPropagation();
+					var panel = document.querySelector('.wide_side_inner');
+					if (panel) {
+						panel.classList.toggle('wide_side_on');
+						document.body.classList.toggle('body_overlay_on');
+					}
+					if (isTouch) {
+						sideSuppressClick = true;
+						setTimeout(function () { sideSuppressClick = false; }, 450);
+					}
+				}
+				window.addEventListener('touchend', function (e) {
+					sideToggle(e, true);
+				}, { capture: true, passive: false });
+				window.addEventListener('click', function (e) {
+					if (sideSuppressClick) {
+						e.preventDefault();
+						e.stopPropagation();
+						return;
+					}
+					sideToggle(e, false);
+				}, true);
 			},
 			scrollTop: function (){
 				$(window).on("scroll", function() {
@@ -213,7 +236,11 @@ Last change:    00/00/00
 				};
 			},
 			FeatureSlider: function (){
-				jQuery('#feature-slide').owlCarousel({
+				var $f = jQuery('#feature-slide');
+				if (!$f.length) {
+					return;
+				}
+				$f.owlCarousel({
 					items: 1,
 					loop: true,
 					nav: false,
@@ -234,7 +261,11 @@ Last change:    00/00/00
 				});
 			},
 			blogSlider: function (){
-				jQuery('#blod_slide').owlCarousel({
+				var $b = jQuery('#blod_slide');
+				if (!$b.length) {
+					return;
+				}
+				$b.owlCarousel({
 					items: 1,
 					loop: true,
 					nav: true,
@@ -355,7 +386,11 @@ Last change:    00/00/00
 				});
 			},
 			testiSlider: function (){
-				jQuery('#testimonial-slide').owlCarousel({
+				var $t = jQuery('#testimonial-slide');
+				if (!$t.length) {
+					return;
+				}
+				$t.owlCarousel({
 					items:1,
 					nav:false,
 					dots: true,
@@ -369,14 +404,18 @@ Last change:    00/00/00
 				});
 			},
 			ProjectFilter: function (){
-				var $grid = $('.grid').imagesLoaded( function() {
+				var $grid = $(".grid");
+				if (!$grid.length) {
+					return;
+				}
+				$grid.imagesLoaded( function() {
 					$grid.masonry({
 						percentPosition: true,
 						itemSelector: '.grid-item',
 						columnWidth: '.grid-sizer'
 					}); 
 				});
-				var $grid = $(".grid").isotope({
+				$grid.isotope({
 					itemSelector: ".grid-item",
 					layoutMode: "fitRows"
 				});
