@@ -26,15 +26,20 @@
 			document.querySelectorAll('.mobile_menu_wrap').forEach(function (w) {
 				w.classList.remove('mobile_menu_on');
 			});
+			document.querySelectorAll('.mobile_menu_button').forEach(function (b) {
+				b.setAttribute('aria-expanded', 'false');
+			});
 			document.body.classList.remove('mobile_menu_overlay_on');
 		}
 		function toggleMobileMenu() {
 			var menu = document.querySelector('.mobile_menu');
 			if (!menu) return;
 			var wrap = menu.querySelector('.mobile_menu_wrap');
+			var btn = menu.querySelector('.mobile_menu_button');
 			if (!wrap) return;
 			var open = !wrap.classList.contains('mobile_menu_on');
 			wrap.classList.toggle('mobile_menu_on', open);
+			if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 			document.body.classList.toggle('mobile_menu_overlay_on', open);
 		}
 		function bindMobileMenu() {
@@ -144,7 +149,7 @@
 		<div class="mobile_menu relative-position">
 			<div class="mobile_menu_wrap">
 				<div class="mobile_menu_overlay"></div>
-				<div class="mobile_menu_content">
+				<div class="mobile_menu_content" id="mobile-nav-drawer">
 					<div class="m-brand-logo text-center">
 						<img src="{% static 'user/img/logo/New_logo-removebg-preview (1).png' %}" alt="CodeCraften" class="mobile-logo">
 					</div>
@@ -172,7 +177,7 @@
 					</div>
 				</div>
 			</div>
-			<button type="button" class="mobile_menu_button" aria-label="Open menu">
+			<button type="button" class="mobile_menu_button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
 				<i class="fas fa-bars" aria-hidden="true"></i>
 			</button>
 		</div>
@@ -263,7 +268,7 @@
 					</div>
 				</div>
 			</div>
-            <div class="footer-copyright text-center" style="padding-top: 30px; padding-bottom: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #6e7688;">
+            <div class="footer-copyright text-center responsive-footer-copy" style="border-top: 1px solid rgba(255,255,255,0.1); color: #6e7688;">
                 <p>&copy; {% now "Y" %} CodeCraften. All rights reserved.</p>
             </div>
 		</div>
