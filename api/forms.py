@@ -36,7 +36,18 @@ class ServiceForm(forms.ModelForm):
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ['title', 'slug', 'short_description', 'description', 'image', 'client_name', 'project_date', 'order', 'is_active']
+        fields = [
+            'title',
+            'slug',
+            'category',
+            'short_description',
+            'description',
+            'image',
+            'client_name',
+            'project_date',
+            'order',
+            'is_active',
+        ]
 
 
 class BlogPostForm(forms.ModelForm):

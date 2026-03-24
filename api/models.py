@@ -38,8 +38,24 @@ class Service(models.Model):
 
 
 class Portfolio(models.Model):
+    CATEGORY_CASE_STUDY = 'case-study'
+    CATEGORY_IT_CONSULTANCY = 'it-consultancy'
+    CATEGORY_UIX_DESIGN = 'uix-design'
+    CATEGORY_SOFTWARE = 'software'
+    CATEGORY_CHOICES = [
+        (CATEGORY_CASE_STUDY, 'Case Study'),
+        (CATEGORY_IT_CONSULTANCY, 'IT Consultancy'),
+        (CATEGORY_UIX_DESIGN, 'UI/UX Design'),
+        (CATEGORY_SOFTWARE, 'Software'),
+    ]
+
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
+    category = models.CharField(
+        max_length=30,
+        choices=CATEGORY_CHOICES,
+        default=CATEGORY_CASE_STUDY,
+    )
     short_description = models.TextField(blank=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='portfolio/', blank=True, null=True)

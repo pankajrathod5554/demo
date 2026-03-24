@@ -1,6 +1,6 @@
 {% extends 'user_site/base.html' %}
 {% load static %}
-{% block title %}Portfolio Details{% endblock %}
+{% block title %}{{ portfolio.title }} — Portfolio{% endblock %}
 {% block content %}
 
 
@@ -10,11 +10,12 @@
 		<div class="background_overlay"></div>
 		<div class="container">
 			<div class="breadcurmb-content headline-2">
-				<h2>Portfolio Details</h2>
+				<h2>{{ portfolio.title }}</h2>
 				<div class="breadcrumb_item ul-li">
 					<ul class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active"> Portfolio Details</li>
+						<li class="breadcrumb-item"><a href="{% url 'api:index_1' %}">Home</a></li>
+						<li class="breadcrumb-item"><a href="{% url 'api:case_list' %}">Portfolio</a></li>
+						<li class="breadcrumb-item active">{{ portfolio.title|truncatewords:6 }}</li>
 					</ul>
 				</div>
 			</div>
@@ -43,77 +44,44 @@
 		<div class="container">
 			<div class="project-details-content">
 				<div class="project-details-img position-relative">
-					<img src="{% static 'user/img/portfolio/pdb.html' %}" alt="">
+					{% if portfolio.image %}
+					<img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}">
+					{% else %}
+					<img src="{% static 'user/img/blog/b4.jpg' %}" alt="{{ portfolio.title }}">
+					{% endif %}
 					<div class="project-overview headline-2">
-						<h3>Project Details</h3>
+						<h3>Project details</h3>
 						<div class="project-overview-list ul-li-block">
 							<ul>
-								<li><span>Name: </span> Romada D. Kilixer</li>
-								<li><span>Category: </span> <strong>Data Mining, Software</strong></li>
-								<li><span>Date: </span> 24th March 2020</li>
-								<li><span>Duration: </span> 5 Months</li>
+								<li><span>Title: </span> {{ portfolio.title }}</li>
+								{% if portfolio.client_name %}<li><span>Client: </span> {{ portfolio.client_name }}</li>{% endif %}
+								<li><span>Category: </span> <strong>{{ portfolio.get_category_display }}</strong></li>
+								{% if portfolio.project_date %}<li><span>Date: </span> {{ portfolio.project_date|date:"j F Y" }}</li>{% endif %}
 							</ul>
-							<a href="#">Live Preview</a>
+							<a href="{% url 'api:case_list' %}">Back to portfolio</a>
 						</div>
 					</div>
 				</div>
 				<div class="project-details-text">
 					<div class="section-title title-style-two headline-2">
-						<span class="site-tag">Project Overview</span>
-						<h2>Cloud Migration Saves Money For
-						Health Insurer</h2>
+						<span class="site-tag">Project overview</span>
+						<h2>{{ portfolio.title }}</h2>
 					</div>
-					<article>
-						Humans have been storing, retrieving, manipulating, and communicating information since the Sumerians in Mesopotamia developed writing in about 3000 BC,[3] but the term information technology in its modern sense first appeared in a 1958 article published in the Harvard Business Review; authors Harold J. Leavitt and Thomas L. Whisler commented that "the new technology does not yet have a single established name. We shall call it information technology (IT)." Their definition consists of three categories: techniques for processing, the application of statistical and mathematical methods to decision-making, and the simulation of higher-order thinking through computer programs.
-					</article>
-					<article>
-						Electronic computers, using either relays or valves, began to appear in the early 1940s. The electromechanical Zuse Z3, completed in 1941, was the world's first programmable computer, and by modern standards one of the first machines that could be considered a complete computing machine. Colossus, developed during the Second World War to decrypt German messages, was the first electronic digital computer. Although it was programmable, it was not general-purpose, being designed to perform only a single task. It also lacked the ability to store its program in memory; programming was carried out using plugs and switches to alter the internal wiring.[10] The first recognisably modern electronic digital stored-program computer was the Manchester Baby, which ran its first program on 21 June 1948. Electronic computers, using either relays or valves, began to appear in the early 1940s. The electromechanical Zuse Z3, completed in 1941, was the world's first programmable computer, and by modern standards one of the first machines that could be considered a complete computing machine. Colossus, developed during the Second World War to decrypt German messages, was the first electronic digital computer. Although it was programmable, it was not general-purpose, being designed to perform only a single task. It also lacked the ability to store its program in memory; programming. 
-					</article>
-					<div class="project-details-inner-img">
-						<div class="row">
-							<div class="col-md-6">
-								<img src="{% static 'user/img/portfolio/pds1.html' %}" alt="">
-							</div>
-							<div class="col-md-6">
-								<img src="{% static 'user/img/portfolio/pds1.html' %}" alt="">
-							</div>
-						</div>
-					</div>
-					<article>
-						Humans have been storing, retrieving, manipulating, and communicating information since the Sumerians in Mesopotamia developed writing in about 3000 BC,[3] but the term information technology in its modern sense first appeared in a 1958 article published in the Harvard Business Review; authors Harold J. Leavitt and Thomas L. Whisler commented that "the new technology does not yet have a single established name. We shall call it information technology (IT)." Their definition consists of three categories: techniques for processing, the application of statistical and mathematical methods to decision-making, and the simulation of higher-order thinking through computer programs.
-					</article>
-					<div class="portfolio-qoute">
-						<div class="port-qout-img float-left">
-							<img src="{% static 'user/img/portfolio/pdq.html' %}" alt="">
-						</div>
-						<div class="port-qout-text pera-content headline-2" data-background="{% static 'user/img/banner/qbg.html' %}">
-							<p>Early electronic computers such as Colossus made use of punched tape, a long strip of
-								paper on which data was represented by a series of holes, a technology now obsolete
-								Electronic data storage, which is used in modern computers, dates from World War II, 
-							when a form of delay line memory was developed to remove</p>
-							<h4 class="pq-name float-left">Rosalina D.</h4>
-							<span class="pq-degi">Founder Or Coxer Co.</span>
-						</div> 
-						<div class="portfolio-details-video">
-							<img src="{% static 'user/img/portfolio/pdv.html' %}" alt="">
-						</div>
-						<article>
-							Humans have been storing, retrieving, manipulating, and communicating information since the Sumerians in Mesopotamia developed writing in about 3000 BC,[3] but the term information technology in its modern sense first appeared in a 1958 article published in the Harvard Business Review; authors Harold J. Leavitt and Thomas L. Whisler commented that "the new technology does not yet have a single established name. We shall call it information technology (IT)." Their definition consists of three categories: techniques for processing, the application of statistical and mathematical methods to decision-making, and the simulation of higher-order thinking through computer programs.
-						</article>
-					</div>
+					{% if portfolio.short_description %}
+					<article class="pera-content"><p>{{ portfolio.short_description }}</p></article>
+					{% endif %}
+					{% if portfolio.description %}
+					<article class="pera-content">{{ portfolio.description|linebreaks }}</article>
+					{% elif not portfolio.short_description %}
+					<article class="pera-content"><p>Project description coming soon.</p></article>
+					{% endif %}
 				</div>
 			</div>
 			<div class="next-prev-post">
-				<div class="next-prev-post-item headline-2 float-left text-left">
-					<a href="#">
-						<span>Prev Project</span>
-						<h3>Data Mining UX Project</h3>
-					</a>
-				</div>
-				<div class="next-prev-post-item float-right text-right headline-2">
-					<a href="#">
-						<span>Next Project</span>
-						<h3>Gameboy iOs Project</h3>
+				<div class="next-prev-post-item headline-2 text-center">
+					<a href="{% url 'api:case_list' %}">
+						<span>All projects</span>
+						<h3>View portfolio</h3>
 					</a>
 				</div>
 			</div>
@@ -123,23 +91,4 @@
 	============================================= -->		
 
 
-{% endblock %}
-{% block extra_js %}
-	<script src="{% static 'user/js/jquery.min.js' %}"></script>
-	<script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'user/js/popper.min.js' %}"></script>
-	<script src="{% static 'user/js/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'user/js/jquery.magnific-popup.min.js' %}"></script>
-	<script src="{% static 'user/js/appear.js' %}"></script>
-	<script src="{% static 'user/js/wow.min.js' %}"></script>
-	<script src="{% static 'user/js/parallax-scroll.js' %}"></script>
-	<script src="{% static 'user/js/circle-progress.js' %}"></script>
-	<script src="{% static 'user/js/jquery.easeScroll.min.js' %}"></script>
-	<script src="{% static 'user/js/isotope.pkgd.min.js' %}"></script>
-	<script src="{% static 'user/js/masonry.pkgd.min.js' %}"></script>
-	<script src="{% static 'user/js/imagesloaded.pkgd.min.js' %}"></script>
-	<script src="{% static 'user/js/typer-new.js' %}"></script>
-	<script src="{% static 'user/js/lightbox.html' %}"></script>
-	<script src="{% static 'user/js/script.js' %}"></script>
-	<script src="{% static 'user/js/gmap3.min.js' %}"></script>
 {% endblock %}

@@ -404,21 +404,10 @@ Last change:    00/00/00
 				});
 			},
 			ProjectFilter: function (){
-				var $grid = $(".grid");
+				var $grid = $(".case-filtering-section .project-filtering");
 				if (!$grid.length) {
 					return;
 				}
-				$grid.imagesLoaded( function() {
-					$grid.masonry({
-						percentPosition: true,
-						itemSelector: '.grid-item',
-						columnWidth: '.grid-sizer'
-					}); 
-				});
-				$grid.isotope({
-					itemSelector: ".grid-item",
-					layoutMode: "fitRows"
-				});
 				var filterFns = {
 					numberGreaterThan50: function() {
 						var number = $(this)
@@ -433,18 +422,30 @@ Last change:    00/00/00
 						return name.match(/ium$/);
 					}
 				};
-				$(".button-group").on("click", "button", function() {
-					var filterValue = $(this).attr("data-filter");
+				$grid.imagesLoaded(function () {
+					$grid.isotope({
+						itemSelector: ".grid-item",
+						percentPosition: true,
+						masonry: {
+							columnWidth: ".grid-sizer"
+						}
+					});
+					$grid.magnificPopup({
+						delegate: ".case-popup a",
+						type: "image",
+						gallery: { enabled: true },
+						mainClass: "mfp-fade"
+					});
+				});
+				$(".case-filtering-section .portfolio-filter-btn").on("click", "button", function (e) {
+					e.preventDefault();
+					var $btn = $(this);
+					var $group = $btn.closest(".portfolio-filter-btn");
+					var filterValue = $btn.attr("data-filter");
 					filterValue = filterFns[filterValue] || filterValue;
 					$grid.isotope({ filter: filterValue });
-				});
-
-				$(".button-group").each(function(i, buttonGroup) {
-					var $buttonGroup = $(buttonGroup);
-					$buttonGroup.on("click", "button", function() {
-						$buttonGroup.find(".is-checked").removeClass("is-checked");
-						$(this).addClass("is-checked");
-					});
+					$group.find("button").removeClass("is-checked").attr("aria-pressed", "false");
+					$btn.addClass("is-checked").attr("aria-pressed", "true");
 				});
 			},
 			faqShadow: function (){
