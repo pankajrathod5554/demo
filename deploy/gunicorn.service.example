@@ -1,0 +1,25 @@
+# Install: sudo cp deploy/gunicorn.service.example /etc/systemd/system/gunicorn-codecraften.service
+# Edit paths if your project is not in /var/www/codecraften
+# Then: sudo systemctl daemon-reload && sudo systemctl enable --now gunicorn-codecraften
+
+[Unit]
+Description=Gunicorn for CodeCraften Django
+After=network.target postgresql.service
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/codecraften
+Environment=PATH=/var/www/codecraften/.venv/bin
+RuntimeDirectory=gunicorn
+RuntimeDirectoryMode=0755
+ExecStart=/var/www/codecraften/.venv/bin/gunicorn \
+    --workers 3 \
+    --timeout 120 \
+    --bind unix:/run/gunicorn/gunicorn.sock \
+    myproject.wsgi:application
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
